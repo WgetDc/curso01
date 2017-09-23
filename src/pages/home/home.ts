@@ -19,4 +19,8 @@ export class HomePage {
     this.navCtrl.push(DetallePage, {id:id});
   }
 
+  goToPageCrear(){
+    this.navCtrl.push("CrearPage");
+  }
+
 }
