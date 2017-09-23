@@ -18,8 +18,4 @@ export class ListasService {
     return this.listas.filter(function(e,i){
       return e.id == id }) [0] || {id:null, nombre:null, descripcion:null, img:null};
   }
-
-  public addLenguaje(lenguaje){
-    this.listas.push(lenguaje);
-  }
 }

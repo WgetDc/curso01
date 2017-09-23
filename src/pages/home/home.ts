@@ -19,8 +19,4 @@ export class HomePage {
     this.navCtrl.push(DetallePage, {id:id});
   }
 
-  goToPageAdd(){
-    this.navCtrl.push("AddPage");
-  }
-
 }
