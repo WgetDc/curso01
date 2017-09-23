@@ -1,10 +1,22 @@
 <ion-header>
 
-  <ion-navbar>
+  <ion-navbar color="dark">
     <ion-title>Pagina de detalle</ion-title>
     <ion-buttons end>
       <button (click)="estasSeguro()" ion-button icon-only color="danger">
         <ion-icon name="trash"></ion-icon>
+      </button>
+    </ion-buttons>
+
+    <ion-buttons end>
+      <button (click)="editar()" ion-button icon-only color="secondary">
+        <ion-icon name="create"></ion-icon>
+      </button>
+    </ion-buttons>
+
+    <ion-buttons end>
+      <button (click)="undo()" ion-button icon-only color="secondary">
+        <ion-icon name="undo"></ion-icon>
       </button>
     </ion-buttons>
   </ion-navbar>
@@ -25,5 +37,29 @@
      </p>
   </ion-card-content>
 </ion-card>
+
+
+<ion-list *ngIf="edit == true">
+
+  <ion-item>
+    <ion-label floating>Nombre</ion-label>
+    <ion-input [(ngModel)]="lista.nombre" type="text"></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label floating>Descripcion</ion-label>
+    <ion-input [(ngModel)]="lista.descripcion" type="text"></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label floating>img</ion-label>
+    <ion-input [(ngModel)]="lista.img" type="text"></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <button (click)="editarLenguaje()" ion-button block full color="secondary">Confirmar</button>
+  </ion-item>  
+
+</ion-list>
 
 </ion-content>

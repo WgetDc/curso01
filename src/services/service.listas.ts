@@ -34,7 +34,10 @@ export class ListasService {
    // }
   }
 
- 
+ editLenguaje(lista){
+   let index = this.listas.indexOf(lista);
+   this.listas[index] = lista;
+ }
 
   
 }

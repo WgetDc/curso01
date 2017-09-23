@@ -11,7 +11,9 @@ import { AlertController } from 'ionic-angular';
 export class DetallePage {
 
   lista = {id:null, nombre:null, descripcion:null, img:null };
- id = null;
+  id = null;
+  edit:any=false;
+
   constructor(public navCtrl: NavController, public navParams: NavParams,
   private serviceListas : ListasService, public alertCtrl: AlertController) {
     this.id = navParams.get('id');
@@ -46,6 +48,19 @@ export class DetallePage {
       ]
     });
     confirm.present();
+  }
+
+  editar(){
+    this.edit = true;
+  }
+
+  editarLenguaje(){
+    this.serviceListas.editLenguaje(this.lista);
+    this.navCtrl.pop();
+  }
+
+  undo(){
+    this.edit = false;
   }
 
 
