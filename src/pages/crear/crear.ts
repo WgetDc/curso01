@@ -31,6 +31,8 @@ export class CrearPage {
     this.lista.id= Date.now();
     this.servicioListas.addlenguaje(this.lista);
     this.navCtrl.pop();
+
+    
   }
 
 }

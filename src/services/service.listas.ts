@@ -1,4 +1,5 @@
 import {Injectable} from '@Angular/core'; 
+import { AlertController } from 'ionic-angular';
 
 @Injectable()
 
@@ -22,4 +23,18 @@ export class ListasService {
   public addlenguaje(lista){
     this.listas.push(lista);
   }
+  
+  public deleteLenguaje(lista){
+    let index = this.listas.indexOf(lista);
+    this.listas.splice(index,1);        
+   // for (let i = 0 ; i < this.listas.lenght; i++){
+    //  if(this.listas[i].id == lista[i].id){
+    //    this.listas.splice(i,1);
+   //   }
+   // }
+  }
+
+ 
+
+  
 }
