@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import {ListasService } from '../../services/service.listas';
 import { AlertController } from 'ionic-angular';
+import { Camera, CameraOptions } from '@ionic-native/camera';
 
 @IonicPage()
 @Component({
@@ -9,15 +10,20 @@ import { AlertController } from 'ionic-angular';
   templateUrl: 'detalle.html',
 })
 export class DetallePage {
-
-  lista = {id:null, nombre:null, descripcion:null, img:null };
+  image: string = null;
+  lista = {id:null, nombre:null, descripcion:null, img:this.image };
   id = null;
   edit:any=false;
+  
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
-  private serviceListas : ListasService, public alertCtrl: AlertController) {
+  private serviceListas : ListasService, public alertCtrl: AlertController,
+  private camera: Camera) {
     this.id = navParams.get('id');
-    this.lista = serviceListas.getLista(this.id);
+      serviceListas.getLista(this.id)
+          .subscribe(lenguaje => {
+            this.lista = lenguaje;
+          });
   }
 
   ionViewDidLoad() {
@@ -61,6 +67,22 @@ export class DetallePage {
 
   undo(){
     this.edit = false;
+  }
+
+   getPicture(){
+    let options: CameraOptions = {
+      destinationType: this.camera.DestinationType.DATA_URL,
+      targetWidth: 1000,
+      targetHeight: 1000,
+      quality: 100
+    }
+    this.camera.getPicture( options )
+    .then(imageData => {
+      this.image = `data:image/jpeg;base64,${imageData}`;
+    })
+    .catch(error =>{
+      console.error( error );
+    });
   }
 
 

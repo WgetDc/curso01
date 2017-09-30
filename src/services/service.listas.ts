@@ -1,9 +1,15 @@
 import {Injectable} from '@Angular/core'; 
 import { AlertController } from 'ionic-angular';
+import { AngularFireDatabase } from 'angularfire2/database';
 
 @Injectable()
 
+
 export class ListasService {
+
+  constructor(public afDB: AngularFireDatabase){
+
+}
         listas:any = [
             {id:1, nombre:"JavasScript", descripcion:"FrontEnd", img:"http://nodeframework.com/assets/img/js.png"},
             {id:2, nombre:"C#", descripcion:"Backend", img:"http://www.programmingapps.net/resources_progapps/uploads/2016/11/csharp7.png"},
@@ -12,21 +18,26 @@ export class ListasService {
   ];
 
   public getListas(){
-     return this.listas;
+    return this.afDB.list('curso01/');
+     //return this.listas;
   }
 
   public getLista(id){
-    return this.listas.filter(function(e,i){
+    return this.afDB.object('curso01/'+id);
+   /* return this.listas.filter(function(e,i){
       return e.id == id }) [0] || {id:null, nombre:null, descripcion:null, img:null};
-  }
+  */  
+}
 
   public addlenguaje(lista){
-    this.listas.push(lista);
+    this.afDB.database.ref('curso01/'+lista.id).set(lista);
+    //this.listas.push(lista);
   }
   
   public deleteLenguaje(lista){
-    let index = this.listas.indexOf(lista);
-    this.listas.splice(index,1);        
+    this.afDB.database.ref('curso01/'+lista.id).remove();
+    /* let index = this.listas.indexOf(lista);
+    this.listas.splice(index,1);     */    
    // for (let i = 0 ; i < this.listas.lenght; i++){
     //  if(this.listas[i].id == lista[i].id){
     //    this.listas.splice(i,1);
@@ -35,8 +46,9 @@ export class ListasService {
   }
 
  editLenguaje(lista){
-   let index = this.listas.indexOf(lista);
-   this.listas[index] = lista;
+   this.afDB.database.ref('curso01/'+lista.id).set(lista);
+ /*  let index = this.listas.indexOf(lista);
+   this.listas[index] = lista; */
  }
 
   

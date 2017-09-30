@@ -12,7 +12,10 @@ export class HomePage {
   listas:any = [];
 
   constructor(public navCtrl: NavController, private serviceListas : ListasService) {
-   this.listas = this.serviceListas.getListas();
+    serviceListas.getListas()
+        .subscribe(lenguajes => {
+          this.listas = lenguajes;
+        });
   }
 
   public goToPageDetalle(id){

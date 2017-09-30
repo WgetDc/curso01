@@ -5,10 +5,22 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
 import {ListasService } from '../services/service.listas';
 
+import { AngularFireModule } from 'angularfire2';
+import { AngularFireDatabaseModule } from 'angularfire2/database';
+import { AngularFireAuthModule } from 'angularfire2/auth';
 
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
 import { DetallePage } from '../pages/detalle/detalle';
+import { Camera } from '@ionic-native/camera';
+
+export const firebaseConfig = {
+  apiKey: "AIzaSyCVTUrX2zSS-RentYMeVRCf24un-vDSX5M",
+  authDomain: "curso01-1ec1e.firebaseapp.com",
+  databaseURL: "https://curso01-1ec1e.firebaseio.com",
+  storageBucket: "curso01-1ec1e.appspot.com",
+  messagingSenderId: '464031368095'
+};
 
 @NgModule({
   declarations: [
@@ -18,7 +30,10 @@ import { DetallePage } from '../pages/detalle/detalle';
   ],
   imports: [
     BrowserModule,
-    IonicModule.forRoot(MyApp)
+    IonicModule.forRoot(MyApp),
+    AngularFireModule.initializeApp(firebaseConfig),
+    AngularFireDatabaseModule,
+    AngularFireAuthModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -30,7 +45,8 @@ import { DetallePage } from '../pages/detalle/detalle';
     StatusBar,
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
-    ListasService
+    ListasService,
+    Camera
   ]
 })
 export class AppModule {}
