@@ -11,7 +11,7 @@ import { Camera, CameraOptions } from '@ionic-native/camera';
 })
 export class DetallePage {
   image: string = null;
-  lista = {id:null, nombre:null, descripcion:null, img:this.image };
+  lista = {id:null, nombre:null, descripcion:null, img:null };
   id = null;
   edit:any=false;
   
@@ -79,6 +79,7 @@ export class DetallePage {
     this.camera.getPicture( options )
     .then(imageData => {
       this.image = `data:image/jpeg;base64,${imageData}`;
+      this.lista.img =  `data:image/jpeg;base64,${imageData}`;
     })
     .catch(error =>{
       console.error( error );
